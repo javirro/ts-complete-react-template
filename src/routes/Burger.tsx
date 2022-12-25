@@ -1,5 +1,9 @@
+import OpenGraphTags from "../components/OpenGraphTags"
+
 const Burger = () => {
-  return(<div></div>)
+  return(<div>
+    <OpenGraphTags title={"Burger ranking"} />
+  </div>)
 
 }
 export default Burger

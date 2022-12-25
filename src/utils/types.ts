@@ -3,3 +3,7 @@ export interface RankingData {
   position: string
   price?: string
 }
+
+export interface OpenGraphTagsProps {
+  title?: string
+}

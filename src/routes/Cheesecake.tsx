@@ -3,6 +3,7 @@ import { RankingData } from '../utils/types'
 import '../styles/inputPages.css'
 import '../styles/global.css'
 import CheeseCakeRanking from '../components/CheesecakeRanking'
+import OpenGraphTags from '../components/OpenGraphTags'
 
 const Cheesecake = () => {
   const [input, setInput] = useState<RankingData>({
@@ -15,6 +16,7 @@ const Cheesecake = () => {
 
   return (
     <div className="container">
+      <OpenGraphTags title={"Cheesecake ranking"} />
       <input
         type="text"
         value={input.restaurant}

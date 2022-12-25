@@ -1,5 +1,9 @@
+import OpenGraphTags from "../components/OpenGraphTags"
+
 const Home = () => {
-  return(<div></div>)
+  return(<div>
+    <OpenGraphTags title={"Food ranking"} />
+  </div>)
 
 }
 export default Home
