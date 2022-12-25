@@ -8,14 +8,13 @@ const Cheesecake = () => {
   const [input, setInput] = useState<RankingData>({
     restaurant: '',
     position: '',
+    price: '',
   })
 
-  const saveHandler = async () => {
-
-  }
+  const saveHandler = async () => {}
 
   return (
-    <div className='container'>
+    <div className="container">
       <input
         type="text"
         value={input.restaurant}
@@ -35,7 +34,19 @@ const Cheesecake = () => {
           setInput({ ...input, position: e.target.value })
         }}
       />
-      <button className='save' onClick={saveHandler}> Save cheesecake </button>
+
+      <input
+        type="text"
+        value={input.price}
+        placeholder="How much does it cost?"
+        className="text-inputs"
+        onChange={(e) => {
+          setInput({ ...input, price: e.target.value })
+        }}
+      />
+      <button className="save" onClick={saveHandler}>
+        Save cheesecake
+      </button>
 
       <CheeseCakeRanking />
     </div>
