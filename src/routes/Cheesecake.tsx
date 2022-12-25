@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import { RankingData } from '../utils/types'
-import '../styles/inputs.css'
+import '../styles/inputPages.css'
 import '../styles/global.css'
+import CheeseCakeRanking from '../components/CheesecakeRanking'
 
 const Cheesecake = () => {
   const [input, setInput] = useState<RankingData>({
     restaurant: '',
     position: '',
   })
+
+  const saveHandler = async () => {
+
+  }
 
   return (
     <div className='container'>
@@ -30,6 +35,9 @@ const Cheesecake = () => {
           setInput({ ...input, position: e.target.value })
         }}
       />
+      <button className='save' onClick={saveHandler}> Save cheesecake </button>
+
+      <CheeseCakeRanking />
     </div>
   )
 }
