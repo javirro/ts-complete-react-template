@@ -5,29 +5,5 @@
   align-items: center;
   justify-content: center;
   background: grey;
-  position: relative;
-}
 
-.chart-style {
-  background-color: grey;
-}
-
-.circle title {
-  display: none;
-  position: absolute;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  text-align: center;
-  font-size: 12px;
-  pointer-events: none;
-}
-
-.circle:hover title {
-  display: block;
-  left: 50%;
-  top: -28px;
-  transform: translateX(-50%);
-  z-index: 1;
 }
