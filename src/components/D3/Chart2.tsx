@@ -1,23 +1,33 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import * as d3 from 'd3';
 import '../../App.css'
+import '../../styles/tooltip.css'
 
+// const Tooltip = ({ date, pnl }) => {
+//   return (
+//     <div className='tooltip-container'>
+//       <span>{date}</span>
+//       <span>{pnl}</span>
+//     </div>
+//   )
+// }
 const ScatterPlot = ({ data }) => {
   const svgRef = useRef();
   const parseDate = d3.timeParse('%Y-%m-%dT%H:%M:%S'); // Date and time format
   const dataWithParseDate = useMemo(() => data.map(d => ({ ...d, date: parseDate(d.date) })), [data, parseDate])
 
   useEffect(() => {
-    const margin = { top: 10, right: 30, bottom: 30, left: 60 }
-    const width: number = 460 - margin.left - margin.right
-    const height: number = 400 - margin.top - margin.bottom
+    const margin = { top: 10, right: 10, bottom: 10, left: 10 }
+    const padding = { top: 50, right: 60, bottom: 40, left: 40 }; // Define padding
+    const width = 460 - margin.left - margin.right - padding.left - padding.right;
+    const height = 400 - margin.top - margin.bottom - padding.top - padding.bottom;
 
     // Create the SVG container
     const svg = d3.select(svgRef.current)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("width", width + margin.left + margin.right + padding.left + padding.right)
+    .attr("height", height + margin.top + margin.bottom + padding.top + padding.bottom)
+    .append("g")
+    .attr("transform", "translate(" + (margin.left + padding.left) + "," + (margin.top + padding.top) + ")")
 
     // Find the minimum and maximum values for both X and Y
     // const xExtent = d3.extent(data, d => d.date);
@@ -33,11 +43,11 @@ const ScatterPlot = ({ data }) => {
 
 
     // Create lines to connect the data points
-    const line = d3.line()
+    const line = d3.line<{ pnl: number, date: Date }>()
       .x(d => xScale(d.date))
       .y(d => yScale(d.pnl));
 
-    const area = d3.area()
+    const area = d3.area<{ pnl: number, date: Date }>()
       .x(d => xScale(d.date))
       .y0(height)
       .y1(d => yScale(d.pnl));
@@ -56,22 +66,37 @@ const ScatterPlot = ({ data }) => {
     const mouseover = function (event, d) {
       console.log(event)
       console.log(d)
-      // Calculate the position for the tooltip
-      const xPosition = xScale(d.date);
-      const yPosition = yScale(d.pnl);
 
-      // Create a tooltip element and set its position and text
-      d3.select(svgRef.current)
-        .append('text')
-        .attr('class', 'tooltip')
-        .attr('x', xPosition)
-        .attr('y', yPosition - 10) // Adjust the vertical position
-        .text(`Date`);
+      const label = d3.select(svgRef.current)
+        .append('g')
+        .attr("class", "custom-label")
+
+      // Create a background rectangle for the label
+      label.append('rect')
+        .attr('class', 'custom-label')
+        .attr('x', xScale(d.date) - 3) // Adjust horizontal position
+        .attr('y', yScale(d.pnl) - 10) // Adjust vertical position
+        .attr('rx', 5) // Rounded corners
+        .attr('ry', 5) // Rounded corners
+
+      // Create text for the label
+      label.append('text')
+        .attr('class', 'custom-label')
+        .attr('x', xScale(d.date)) // Adjust horizontal position
+        .attr('y', yScale(d.pnl)  + 4) // Adjust vertical position
+        .text(`${d.date.toLocaleString()}`);
+
+      // Create text for the label
+      label.append('text')
+        .attr('class', 'custom-label')
+        .attr('x', xScale(d.date)) // Adjust horizontal position
+        .attr('y', yScale(d.pnl) + 20) // Adjust vertical position
+        .text(`PNL: ${d.pnl} $`);
     }
 
     // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
     const mouseleave = function () {
-      d3.select('.tooltip').remove();
+      d3.select('.custom-label').remove();
     }
 
     svg
