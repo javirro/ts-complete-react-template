@@ -128,6 +128,8 @@ const ScatterPlot = ({ data }) => {
       .remove();
     // svg.append('g')
     //   .call(yAxis);
+
+    return () => { svg.selectAll("*").remove() }
   }, [dataWithParseDate]);
 
   return <svg ref={svgRef}></svg>;

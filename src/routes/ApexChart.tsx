@@ -1,5 +1,6 @@
-import Chart2 from "src/components/D3/Chart2"
+
 import '../App.css'
+import ApexChartZoomable from "src/components/Apex/ApexChartZoomable"
 const D3Chart = () => {
     const data = [
         { date: '2023-01-01T09:30:00', pnl: 2 },
@@ -16,7 +17,7 @@ const D3Chart = () => {
     ]
     return (
         <div className="App">
-            <Chart2 data={data} />
+            <ApexChartZoomable  data={data}/>
         </div>
     )
 }
