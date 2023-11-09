@@ -1,0 +1,15 @@
+
+.custom-label {
+    width: 300px;
+}
+.custom-label rect {
+    fill: #242628;
+    width: 135px;
+    height: 40px;
+}
+
+.custom-label text {
+    font-size: 14px;
+    /* Font size */
+    fill: white;
+}
