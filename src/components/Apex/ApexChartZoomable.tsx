@@ -1,9 +1,9 @@
 import { ApexOptions } from "apexcharts";
 import React from "react";
 import Chart from "react-apexcharts";
+import { formatDatesForGraphicFooter } from "src/utils/dateChartsHelper";
 
 const ApexChartZoomable = ({ data }) => {
-  console.log(data)
 
   // const markers: any = {
   //     size: 2,
@@ -17,13 +17,14 @@ const ApexChartZoomable = ({ data }) => {
   //     radius: 2,
   // }
 
-
+  const xData: string[] = data.map(d => formatDatesForGraphicFooter(d))
+  const yData: number[] = data.map(d => d.pnl)
   const chartOptions: ApexOptions = {
     chart: {
       id: "basic-bar"
     },
     xaxis: {
-      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+      categories: xData
     },
     theme: {
       mode: "dark"
@@ -39,8 +40,8 @@ const ApexChartZoomable = ({ data }) => {
 
   const series = [
     {
-      name: "series-1",
-      data: [30, -40, 45, 50, 49, 60, 70, 91]
+      name: "Pnl",
+      data: yData
     }
   ]
 
