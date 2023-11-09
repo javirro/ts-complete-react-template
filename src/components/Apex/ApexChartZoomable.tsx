@@ -5,36 +5,68 @@ import { formatDatesForGraphicFooter } from "src/utils/dateChartsHelper";
 
 const ApexChartZoomable = ({ data }) => {
 
-  // const markers: any = {
-  //     size: 2,
-  //     colors: undefined,
-  //     strokeColors: '#00000',
-  //     strokeWidth: 2,
-  //     strokeOpacity: 0.9,
-  //     strokeDashArray: 0,
-  //     fillOpacity: 1,
-  //     shape: "circle",
-  //     radius: 2,
-  // }
-
   const xData: string[] = data.map(d => formatDatesForGraphicFooter(d))
   const yData: number[] = data.map(d => d.pnl)
   const chartOptions: ApexOptions = {
     chart: {
-      id: "basic-bar"
+      id: "basic-bar",
+      foreColor: '#1FDE6B', //this is the color for the axis labels
+      toolbar: {
+        show: true,
+        tools: {
+          download: false,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: false,
+          reset: true,
+          customIcons: []
+        },
+      },
     },
     xaxis: {
-      categories: xData
+      categories: xData,
+      labels: {
+        show: false
+      },
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false
+      }
+    },
+    yaxis: {
+      labels: {
+        show: false
+      },
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false
+      }
     },
     theme: {
       mode: "dark"
     },
-
     markers: {
       size: 5,
       fillOpacity: 0.8,
       strokeColors: '#1FDE6B',
       strokeWidth: 2,
+    },
+    grid: {
+      show: false,
+    },
+    stroke: {
+      show: true,
+      curve: 'straight',
+      lineCap: 'butt',
+      colors: ['#1FDE6B', "FFFFF", '#1FDE6B', "FFFFF", '#1FDE6B', "FFFFF", '#1FDE6B', "FFFFF",],
+      width: 2,
+      dashArray: 0,
     }
   }
 
@@ -51,7 +83,7 @@ const ApexChartZoomable = ({ data }) => {
       <Chart
         options={chartOptions}
         series={series}
-        type="line"
+        type="area"
         width="800"
         height="500"
       />
