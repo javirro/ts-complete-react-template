@@ -10,6 +10,7 @@ const ApexChartZoomable = ({ data }) => {
   const chartOptions: ApexOptions = {
     chart: {
       id: "basic-bar",
+      background: "transparent",
       foreColor: '#1FDE6B', //this is the color for the axis labels
       toolbar: {
         show: true,
@@ -21,7 +22,6 @@ const ApexChartZoomable = ({ data }) => {
           zoomout: true,
           pan: false,
           reset: true,
-          customIcons: []
         },
       },
     },
@@ -67,6 +67,10 @@ const ApexChartZoomable = ({ data }) => {
       colors: ['#1FDE6B', "FFFFF", '#1FDE6B', "FFFFF", '#1FDE6B', "FFFFF", '#1FDE6B', "FFFFF",],
       width: 2,
       dashArray: 0,
+    },
+    fill: {
+      colors: ['#1FDE6B'],
+      opacity:0.6,
     }
   }
 
