@@ -3,7 +3,7 @@ import React from "react";
 import Chart from "react-apexcharts";
 import { formatDatesForGraphicFooter } from "src/utils/dateChartsHelper";
 
-const ApexChartZoomable = ({ data }) => {
+const AreaApexChart = ({ data }) => {
 
   const xData: string[] = data.map(d => formatDatesForGraphicFooter(d))
   const yData: number[] = data.map(d => d.pnl)
@@ -71,7 +71,35 @@ const ApexChartZoomable = ({ data }) => {
     fill: {
       colors: ['#1FDE6B'],
       opacity:0.6,
-    }
+    },
+    dataLabels: {
+      enabled: false // Remove the labels in each marker when chart type is area
+    },
+    tooltip: {
+      enabled: true,
+      followCursor: false,
+      intersect: false,
+      custom: undefined,
+      fillSeriesColor: false,
+      style: {
+        fontSize: '13px',
+        fontFamily: undefined
+      },
+      x: {
+          show: true, // show x labels 
+          format: 'dd MMM',
+          formatter: undefined,
+      },
+      y: {
+          formatter: undefined,
+          title: {
+              formatter: (seriesName) => seriesName,
+          },
+      },
+      marker: { // Show the green point in the tooltip
+          show: true,
+      },
+  }
   }
 
   const series = [
@@ -96,4 +124,4 @@ const ApexChartZoomable = ({ data }) => {
 
 }
 
-export default ApexChartZoomable
+export default AreaApexChart

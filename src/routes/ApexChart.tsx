@@ -1,6 +1,6 @@
 
 import '../App.css'
-import ApexChartZoomable from "src/components/Apex/ApexChartZoomable"
+import AreaApexChart from "src/components/Apex/AreaApexChart"
 const D3Chart = () => {
     const data = [
         { date: '2023-01-01T09:30:00', pnl: 2 },
@@ -17,7 +17,7 @@ const D3Chart = () => {
     ]
     return (
         <div className="App">
-            <ApexChartZoomable  data={data}/>
+            <AreaApexChart  data={data}/>
         </div>
     )
 }
