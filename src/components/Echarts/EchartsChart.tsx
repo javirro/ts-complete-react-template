@@ -7,7 +7,7 @@ const EchartsChart = ({ data }: { data: PNLData[] }) => {
   useEffect(() => {
     if (chartRef.current) {
       // Initialize ECharts instance
-      const myChart = echarts.init(chartRef.current);
+      const myChart = echarts.init(chartRef.current, 'dark');
 
       // ECharts options for the area chart
       const options: echarts.EChartsOption = {
@@ -37,17 +37,20 @@ const EchartsChart = ({ data }: { data: PNLData[] }) => {
         },
         yAxis: {
           type: 'value',
-          boundaryGap: [0, '100%']
+          boundaryGap: [0, '100%'],
+          position: 'right',
+          name: "PnL",
+          nameLocation: "middle"
         },
         dataZoom: [
           {
             type: 'inside',
-            start: 0,
-            end: 10
+            start: data.length-30,
+            end: data.length
           },
           {
-            start: 0,
-            end: 10
+            start: data.length-30,
+            end: data.length
           }
         ],
         series: [
@@ -57,19 +60,34 @@ const EchartsChart = ({ data }: { data: PNLData[] }) => {
             symbol: 'none',
             sampling: 'lttb',
             itemStyle: {
-              color: 'rgb(255, 70, 131)'
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                    offset: 0, color: 'green' // color at 0%
+                }, {
+                    offset: 1, color: 'red' // color at 100%
+                }],
+                global: false // default is false
+              }
             },
             areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: 'rgb(255, 158, 68)'
-                },
-                {
-                  offset: 1,
-                  color: 'rgb(255, 70, 131)'
-                }
-              ])
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                    offset: 0, color: 'green' // color at 0%
+                }, {
+                    offset: 1, color: 'red' // color at 100%
+                }],
+                global: false // default is false
+              }
             },
             data: data.map(d => d.pnl),
           },

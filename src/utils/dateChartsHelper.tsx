@@ -15,7 +15,7 @@ export const formatDatesForGraphicFooter = (pnlData: PNLData): string => {
 
 // RANDOM CHART DATA
 const generateRandomPnl = () => {
-  return (Math.random() * (20 - (-20)) - 20).toFixed(2);
+  return (Math.random() * (5 - (-5)) - 5).toFixed(2);
 };
 
 export const generateDataArray = (): PNLData[] => {
